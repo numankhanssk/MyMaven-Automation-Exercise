@@ -1,0 +1,30 @@
+package com.example;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class App 
+{
+    public static void main(String[] args) throws InterruptedException
+    {
+        WebDriver driver = new ChromeDriver();
+        driver.get("https://automationexercise.com/");
+        driver.manage().window().maximize();
+
+        // Click on Products link
+        driver.findElement(By.cssSelector("a[href='/products']")).click();
+        Thread.sleep(2000); // 2 sec delay to see it
+
+        // Click Add to Cart button
+        driver.findElement(By.cssSelector("a.add-to-cart")).click();
+        Thread.sleep(2000); // 2 sec delay to see the modal
+
+        // Close modal popup
+        driver.findElement(By.cssSelector("button.close-modal")).click();
+        Thread.sleep(2000); // 2 sec delay to see it close
+
+        // Optional: close browser
+        driver.quit();
+    }
+}
