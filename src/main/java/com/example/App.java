@@ -31,31 +31,31 @@ public class App {
             driver.manage().window().maximize();
 
             // Create explicit wait
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
-        // -------------------------------
-        // Step 1: Click on Products link
-        // -------------------------------
-        WebElement productsLink = driver.findElement(By.cssSelector("a[href='/products']"));
-        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", productsLink);
-        ((JavascriptExecutor) driver).executeScript("arguments[0].click();", productsLink);
-        Thread.sleep(2000); // 2 sec delay to see it
-
-        // -------------------------------
-        // Step 2: Click Add to Cart button
-        // -------------------------------
-        WebElement addToCart = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("a.add-to-cart")));
-        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", addToCart);
-        ((JavascriptExecutor) driver).executeScript("arguments[0].click();", addToCart);
-        Thread.sleep(2000); // 2 sec delay to see the modal
-
-        // -------------------------------
-        // Step 3: Close modal popup
-        // -------------------------------
-        WebElement closeBtn = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("button.close-modal")));
-        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", closeBtn);
-        ((JavascriptExecutor) driver).executeScript("arguments[0].click();", closeBtn);
-        Thread.sleep(2000); // 2 sec delay to see it close
+            // -------------------------------
+            // Step 1: Click on Products link
+            // -------------------------------
+            WebElement productsLink = driver.findElement(By.cssSelector("a[href='/products']"));
+            ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", productsLink);
+            ((JavascriptExecutor) driver).executeScript("arguments[0].click();", productsLink);
+            Thread.sleep(2000); // 2 sec delay to see it
+    
+            // -------------------------------
+            // Step 2: Click Add to Cart button
+            // -------------------------------
+            WebElement addToCart = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("a.add-to-cart")));
+            ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", addToCart);
+            ((JavascriptExecutor) driver).executeScript("arguments[0].click();", addToCart);
+            Thread.sleep(2000); // 2 sec delay to see the modal
+    
+            // -------------------------------
+            // Step 3: Close modal popup
+            // -------------------------------
+            WebElement closeBtn = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("button.close-modal")));
+            ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", closeBtn);
+            ((JavascriptExecutor) driver).executeScript("arguments[0].click();", closeBtn);
+            Thread.sleep(2000); // 2 sec delay to see it close
 
 
             // Print after login
