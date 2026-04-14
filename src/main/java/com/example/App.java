@@ -1,24 +1,36 @@
 package com.example;
 
+import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
-import java.time.Duration;
+import org.openqa.selenium.chrome.ChromeOptions;
 
-public class App 
-{
-    public static void main(String[] args) throws InterruptedException
-    {
-        // Initialize ChromeDriver
-        WebDriver driver = new ChromeDriver();
-        driver.get("https://automationexercise.com/");
-        driver.manage().window().maximize();
+public class App {
 
-        // Create explicit wait
+    public static void main(String[] args) {
+
+        try {
+            WebDriverManager.chromedriver().setup();
+
+            ChromeOptions options = new ChromeOptions();
+
+            // Jenkins/Linux safe mode
+            options.addArguments("--headless=new");
+            options.addArguments("--no-sandbox");
+            options.addArguments("--disable-dev-shm-usage");
+            options.addArguments("--disable-gpu");
+            options.addArguments("--remote-allow-origins=*");
+
+            WebDriver driver = new ChromeDriver(options);
+
+            // Open SauceDemo
+            driver.get("https://automationexercise.com/");
+
+            // Maximize (works in non-headless too; safe to keep)
+            driver.manage().window().maximize();
+
+            // Create explicit wait
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
         // -------------------------------
@@ -45,7 +57,16 @@ public class App
         ((JavascriptExecutor) driver).executeScript("arguments[0].click();", closeBtn);
         Thread.sleep(2000); // 2 sec delay to see it close
 
-        // Optional: close browser
-        driver.quit();
+
+            // Print after login
+            System.out.println("TITLE AFTER LOGIN: " + driver.getTitle());
+
+            // Close browser
+            driver.quit();
+
+        } catch (Exception e) {
+            System.out.println("ERROR: " + e.getMessage());
+            e.printStackTrace();
+        }
     }
 }
